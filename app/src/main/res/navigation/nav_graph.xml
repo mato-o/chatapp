@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/loginFragment">
+
+    <!-- Login Fragment -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.bujnakm.chatapp.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login">
+        <!-- Action to navigate to ChatListFragment -->
+        <action
+            android:id="@+id/action_loginFragment_to_chatListFragment"
+            app:destination="@id/chatListFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.bujnakm.chatapp.RegisterFragment"
+        android:label="Register"
+        tools:layout="@layout/fragment_register">
+        <!-- Action to navigate to LoginFragment -->
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_chatListFragment"
+            app:destination="@id/chatListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/chatListFragment"
+        android:name="com.bujnakm.chatapp.ui.ChatListFragment"
+        android:label="Chat List"
+        tools:layout="@layout/fragment_chat_list">
+
+        <action
+            android:id="@+id/action_chatListFragment_to_newChatFragment"
+            app:destination="@id/newChatFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/newChatFragment"
+        android:name="com.bujnakm.chatapp.ui.NewChatFragment"
+        android:label="New Chat"
+        tools:layout="@layout/fragment_new_chat"/>
+</navigation>
