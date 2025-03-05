@@ -50,16 +50,13 @@ class ChatListAdapter(
         holder.username.text = chat.username // Set the username
         holder.lastMessage.text = chat.lastMessage // Set the last message
 
-        // If a profile picture exists, decode and set it. Otherwise use a default image.
-        if (!chat.profilePicBase64.isNullOrEmpty()) {
-
-            val decodedBitmap = decodeBase64ToBitmap(chat.profilePicBase64!!)
+        // If a profile picture exists, decode and set it. Otherwise, use a default image.
+        chat.profilePicBase64?.takeIf { it.isNotEmpty() }?.let { base64String ->
+            val decodedBitmap = decodeBase64ToBitmap(base64String)
             holder.profileImage.setImageBitmap(decodedBitmap)
-        } else {
-            // Set a click listener on the item to navigate to the chat when clicked.
-            holder.profileImage.setImageResource(R.drawable.ic_user) // Default profile image
-        }
+        } ?: holder.profileImage.setImageResource(R.drawable.ic_user) // Default profile image
 
+        // Set a click listener on the item to navigate to the chat when clicked.
         holder.itemView.setOnClickListener { onChatClick(chat) }
     }
     /**
