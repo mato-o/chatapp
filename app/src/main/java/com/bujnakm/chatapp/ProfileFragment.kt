@@ -86,14 +86,13 @@ class ProfileFragment : Fragment() {
      * Handles the result of the image picker activity.
      */
     private val imagePickerLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK && result.data != null) {
-            val imageUri = result.data!!.data
-            if (imageUri != null) {
+        if (result.resultCode == Activity.RESULT_OK) {
+            result.data?.data?.let { imageUri ->  // Safe check for null
                 val bitmap = decodeUriToBitmap(imageUri)
                 val base64String = encodeBitmapToBase64(bitmap)
                 saveBase64ToFirestore(base64String)
                 ivProfilePicture.setImageBitmap(bitmap) // Display selected image
-            }
+            } ?: Log.e("ProfileFragment", "No image URI found in result data")
         }
     }
 
